@@ -12,8 +12,7 @@ ct_info = ['name', 'Facebook (Official)', 'Facebook (Personal)', 'Facebook (Camp
            'Instagram (Campaign)']
 
 # the link to state-specific data hosted on github
-ct_url = 'https://raw.githubusercontent.com/Snebula11/govpackEmailGenerator/main/test1.csv?token' \
-         '=GHSAT0AAAAAABV57NKL22MQC4RITRFFA42AYVU54MA '
+ct_url = 'https://raw.githubusercontent.com/Snebula11/govpackEmailGenerator/main/ct_test_data.csv'
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
