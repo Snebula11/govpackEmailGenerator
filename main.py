@@ -10,7 +10,7 @@ ct_info = ['name', 'Facebook (Official)', 'Facebook (Personal)', 'Facebook (Camp
            'Instagram (Campaign)']
 
 # getting our data and reading into DataFrame
-gp_data = pd.read_csv(r'/Users/benswedberg/Desktop/test1.csv')
+gp_data = pd.read_csv(r'/Users/benswedberg/Desktop/govpackEmailGenerator/test1.csv')
 gp_df = pd.DataFrame(gp_data)
 
 # creating our dictionary of candidates
