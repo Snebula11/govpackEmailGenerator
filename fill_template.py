@@ -50,4 +50,8 @@ def fill_template(data, important_info):
     if len(missing_list) != 0:
         complete_text += missing_sentence + missing_list
 
-    return data['title'].split(" ")[1] + ' ' + data['family_name'] + ",\n\n" + govpack_sentence + complete_text
+    if helpers.isnan(data['title']):
+        return data['name'] + ",\n\n" + govpack_sentence + complete_text
+    else:
+        return data['title'].split(" ")[1] + ' ' + data['family_name'] + ",\n\n" + govpack_sentence + complete_text
+

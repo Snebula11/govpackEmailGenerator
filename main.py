@@ -13,11 +13,12 @@ ct_info = ['name', 'Facebook (Official)', 'Facebook (Personal)', 'Facebook (Camp
 
 # the link to state-specific data hosted on github
 ct_url = 'https://raw.githubusercontent.com/Snebula11/govpackEmailGenerator/main/ct_test_data.csv'
+ca_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/out.csv'
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # available states, urls & info
-    available_states = ["Connecticut"]
+    available_states = ["Connecticut", "California"]
     relevant_info = None
     url = None
 
@@ -32,6 +33,9 @@ if __name__ == '__main__':
 
     if inp == 'Connecticut':
         url = ct_url
+        relevant_info = ct_info
+    elif inp == 'California':
+        url = ca_url
         relevant_info = ct_info
 
     gp_data = pd.read_csv(url)
