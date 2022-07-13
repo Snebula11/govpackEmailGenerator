@@ -13,9 +13,9 @@ ct_info = ['name', 'Facebook (Official)', 'Facebook (Personal)', 'Facebook (Camp
            'Instagram (Campaign)']
 
 # the link to state-specific data hosted on github
-ct_url = 'https://raw.githubusercontent.com/Snebula11/govpackEmailGenerator/main/ct_test_data.csv'
+ct_url = '~/Desktop/govpackEmailGenerator/ct_test_data.csv'
 ca_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/out.csv'
-ok_url = 'https://raw.githubusercontent.com/Snebula11/govpackEmailGenerator/main/out_ctcl.csv'
+ok_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/out_ctcl.csv'
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -39,25 +39,14 @@ if __name__ == '__main__':
     elif inp == 'California':
         url = ca_url
         relevant_info = ct_info
-    else:
+    elif inp == 'Oklahoma':
         url = ok_url
         relevant_info = ct_info
 
     gp_data = pd.read_csv(url)
     gp_df = pd.DataFrame(gp_data)
 
-    # creating our dictionary of candidates
-    candidate_dict = {}
-
-    # initializing our dictionary of candidates
-    for curr_can_index in gp_df.index:
-        # sets key:value pair as 'candidate name':empty_dictionary
-        candidate_dict[gp_df['name'][curr_can_index]] = {}
-        for curr_column in gp_df.columns:
-            # for each data point, we update the empty_dictionary
-            candidate_dict[gp_df['name'][curr_can_index]][curr_column] = gp_df[curr_column][curr_can_index]
-
     with open('output.csv', mode='w') as output:
         writer = csv.writer(output, delimiter=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
-        for candidate in candidate_dict.values():
-            writer.writerow([ft.fill_template(candidate, relevant_info)])
+        for i in gp_df.index:
+            writer.writerow([ft.fill_template(gp_df, i, relevant_info)])
