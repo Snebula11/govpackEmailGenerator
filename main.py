@@ -1,6 +1,7 @@
 # two important python modules
-import pandas as pd
 import csv
+
+import pandas as pd
 
 # imports function that creates the email
 import fill_template as ft
@@ -14,7 +15,7 @@ ct_info = ['name', 'Facebook (Official)', 'Facebook (Personal)', 'Facebook (Camp
 # the link to state-specific data hosted on github
 ct_url = 'https://raw.githubusercontent.com/Snebula11/govpackEmailGenerator/main/ct_test_data.csv'
 ca_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/out.csv'
-ok_url = ''
+ok_url = 'https://raw.githubusercontent.com/Snebula11/govpackEmailGenerator/main/out_ctcl.csv'
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

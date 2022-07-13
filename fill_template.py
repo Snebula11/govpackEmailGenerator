@@ -53,5 +53,5 @@ def fill_template(data, important_info):
     if helpers.isnan(data['title']):
         return data['name'] + ",<br><br>\n\n" + govpack_sentence + complete_text
     else:
-        return data['title'].split(" ")[1] + ' ' + data['family_name'] + ",<br><br>\n\n" + govpack_sentence + complete_text
-
+        return data['title'].split(" ")[1] + ' ' + data[
+            'family_name'] + ",<br><br>\n\n" + govpack_sentence + complete_text
