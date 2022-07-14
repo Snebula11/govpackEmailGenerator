@@ -39,10 +39,10 @@ if __name__ == '__main__':
 
     if inp == 'CT':
         gp_df = helpers.get_data(ct_url)
-        output_data(gp_df, 'ct_emails.csv', ct_info)
+        output_data(gp_df, 'emails/ct_emails.csv', ct_info)
     elif inp == 'CA':
         gp_df = helpers.get_data(ca_url)
-        output_data(gp_df, 'ca_emails.csv', ct_info)
+        output_data(gp_df, 'emails/ca_emails.csv', ct_info)
     elif inp == 'OK':
         gp_df = helpers.get_data(ok_url)
-        output_data(gp_df, 'ok_emails.csv', ct_info)
+        output_data(gp_df, 'emails/ok_emails.csv', ct_info)
