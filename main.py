@@ -10,7 +10,7 @@ ct_info = ['name', 'Facebook (Official)', 'Facebook (Personal)', 'Facebook (Camp
            'Instagram (Campaign)']
 
 # the link to state-specific data hosted on github
-ct_url = '~/Desktop/govpackEmailGenerator/ct_test_data.csv'
+ct_url = 'https://raw.githubusercontent.com/Snebula11/govpackEmailGenerator/main/ct_test_data.csv'
 ca_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/out.csv'
 ok_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/out_ctcl.csv'
 
@@ -25,22 +25,22 @@ def output_data(dataframe, outp, info):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # available states, urls & info
-    available_states = ["Connecticut", "California", "Oklahoma"]
+    available_states = ['CT', 'CA', 'OK']
 
     # user input: take state to generate all emails for
     while True:
-        inp = input("Type the state you want to generate emails for: ").title()
+        inp = input("Type the postal abbr. for the state you need emails: ").upper()
         if inp not in available_states:
             print("Sorry, we can't generate emails for that state. Make sure there were no typos, and try again!")
         else:
             break
 
-    if inp == 'Connecticut':
+    if inp == 'CT':
         gp_df = helpers.get_data(ct_url)
         output_data(gp_df, 'ct_emails.csv', ct_info)
-    elif inp == 'California':
+    elif inp == 'CA':
         gp_df = helpers.get_data(ca_url)
         output_data(gp_df, 'ca_emails.csv', ct_info)
-    elif inp == 'Oklahoma':
+    elif inp == 'OK':
         gp_df = helpers.get_data(ok_url)
         output_data(gp_df, 'ok_emails.csv', ct_info)
