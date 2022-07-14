@@ -9,7 +9,7 @@ def isnan(num):
 
 # reads a .csv file into a DataFrame from its url
 def get_data(url):
-    return pd.DataFrame(pd.read_csv(url))
+    return pd.DataFrame(pd.read_csv(url, keep_default_na=False, na_values=[""]))
 
 
 # goal: automatically copy output to clipboard (essentially copy it)

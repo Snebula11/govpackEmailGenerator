@@ -9,6 +9,11 @@ ct_info = ['name', 'Facebook (Official)', 'Facebook (Personal)', 'Facebook (Camp
            'district_address', 'district_voice', 'youtube', 'Instagram (Official)', 'Instagram (Personal)',
            'Instagram (Campaign)']
 
+ok_info = ['name', 'Facebook (Official)', 'Facebook (Personal)', 'Facebook (Campaign)', 'Twitter (Official)',
+           'Twitter (Personal)', 'Twitter (Campaign)', 'email', 'birth_date', 'capitol_address', 'capitol_voice',
+           'district_address', 'district_voice', 'youtube', 'Instagram (Official)', 'Instagram (Personal)',
+           'Instagram (Campaign)', 'Campaign mailing address', 'Campaign phone', 'LinkedIn']
+
 # the link to state-specific data hosted on github
 ct_url = 'https://raw.githubusercontent.com/Snebula11/govpackEmailGenerator/main/ct_test_data.csv'
 ca_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/out.csv'
@@ -45,4 +50,4 @@ if __name__ == '__main__':
         output_data(gp_df, 'emails/ca_emails.csv', ct_info)
     elif inp == 'OK':
         gp_df = helpers.get_data(ok_url)
-        output_data(gp_df, 'emails/ok_emails.csv', ct_info)
+        output_data(gp_df, 'emails/ok_emails.csv', ok_info)

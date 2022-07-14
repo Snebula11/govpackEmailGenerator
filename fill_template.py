@@ -1,4 +1,3 @@
-import helpers
 import pandas as pd
 
 
@@ -28,7 +27,8 @@ def fill_template(gp_df, index, important_info):
         if column in important_info:
             new_phrase = column.replace('_', ' ')
             new_phrase = new_phrase.replace('voice', 'phone')
-            new_phrase = new_phrase.title()
+            if new_phrase != 'LinkedIn':
+                new_phrase = new_phrase.title()
             if '(' in new_phrase:
                 new_phrase = new_phrase.replace('(', '')
                 new_phrase = new_phrase.replace(')', '')
@@ -36,10 +36,10 @@ def fill_template(gp_df, index, important_info):
                 new_phrase_list.reverse()
                 new_phrase = " ".join(new_phrase_list)
                 # if we don't have the data, add it to the list of missing data
-            if helpers.isnan(gp_df[column][index]) or gp_df[column][index] == 'n/a':
+            if pd.isna(gp_df[column][index]):
                 missing_list += u'\u2022 ' + new_phrase + '<br>\n'
                 # if we do, list the type of data and it's value
-            else:
+            elif gp_df[column][index] != 'n/a':
                 if new_phrase == 'Capitol Address' and '\n' in gp_df[column][index]:
                     data_list += u'\u2022 ' + new_phrase + ': ' + str(gp_df[column][index]).replace('\n', '; ') + \
                                  '<br>\n'
