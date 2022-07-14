@@ -14,7 +14,12 @@ ct_url = 'https://raw.githubusercontent.com/Snebula11/govpackEmailGenerator/main
 ca_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/out.csv'
 ok_url = 'https://raw.githubusercontent.com/Snebula11/oklahama-cleaner/main/out_ctcl.csv'
 
+# available states
+available_states = ['CT', 'CA', 'OK']
 
+
+# takes a dataframe, the name of the file to output to, and the list of headers we want to double-check
+# outputs to filename 'outp' as a N x 1 array of emails
 def output_data(dataframe, outp, info):
     with open(outp, mode='w') as output:
         writer = csv.writer(output, delimiter=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
@@ -24,9 +29,6 @@ def output_data(dataframe, outp, info):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    # available states, urls & info
-    available_states = ['CT', 'CA', 'OK']
-
     # user input: take state to generate all emails for
     while True:
         inp = input("Type the postal abbr. for the state you need emails: ").upper()
