@@ -1,7 +1,10 @@
 import pandas as pd
+import helpers
 
 
-def fill_template(gp_df, index, important_info):
+def fill_template(df):
+    all_emails = []
+
     # initialize sentences to fill it out
     govpack_sentence = "I hope this email finds you well. I'm a researcher with Govpack, an open-source " \
                        "technology that aggregates data on state- and local-level elected officials, allowing local " \
@@ -19,42 +22,47 @@ def fill_template(gp_df, index, important_info):
                        "Sincerely,<br>\n" \
                        "Govpack Research Team"
 
-    # initialize data we have and we're missing
-    data_list = ''
-    missing_list = ''
+    for row in df.index:
 
-    for column in gp_df:
-        if column in important_info:
-            new_phrase = column.replace('_', ' ')
-            new_phrase = new_phrase.replace('voice', 'phone')
-            if new_phrase != 'LinkedIn':
-                new_phrase = new_phrase.title()
-            if '(' in new_phrase:
-                new_phrase = new_phrase.replace('(', '')
-                new_phrase = new_phrase.replace(')', '')
-                new_phrase_list = new_phrase.split(" ")
-                new_phrase_list.reverse()
-                new_phrase = " ".join(new_phrase_list)
-                # if we don't have the data, add it to the list of missing data
-            if pd.isna(gp_df[column][index]):
-                missing_list += u'\u2022 ' + new_phrase + '<br>\n'
-                # if we do, list the type of data and it's value
-            elif gp_df[column][index] != 'n/a':
-                if new_phrase == 'Capitol Address' and '\n' in gp_df[column][index]:
-                    data_list += u'\u2022 ' + new_phrase + ': ' + str(gp_df[column][index]).replace('\n', '; ') + \
-                                 '<br>\n'
+        data_list = ''
+        missing_list = ''
+
+        for header in helpers.checking_info:
+            # creating a string with our header
+            new_header = header.replace('_', ' ')
+            new_header = new_header.title()
+
+            # managing linkedin and RSS
+            if new_header == 'Linkedin':
+                new_header = 'LinkedIn'
+            if new_header == 'Rss':
+                new_header = 'RSS'
+
+            # making two-word columns read properly
+            split_header = new_header.split()
+            if len(split_header) == 2:
+                split_header.reverse()
+                new_header = ' '.join(split_header)
+
+            # if there isn't a value, add it to the list of missing values
+            if pd.isna(df[header][row]):
+                missing_list += u'\u2022 ' + new_header + '<br>\n'
+
+            # if there is a value (and it's not 'n/a'), add it to the list we have
+            elif df[header][row] != 'n/a':
+                if new_header == 'Capitol Address' and '\n' in df[header][row]:
+                    data_list += u'\u2022 ' + new_header + ': ' + str(df[header][row]).replace('\n', '; ') + '<br>\n'
                 else:
-                    data_list += u'\u2022 ' + new_phrase + ': ' + str(gp_df[column][index]) + '<br>\n'
+                    data_list += u'\u2022 ' + new_header + ': ' + str(df[header][row]) + '<br>\n'
 
-    # begin putting together the text
-    complete_text = data_sentence + data_list
+        complete_text = data_sentence + data_list
 
-    # if there's any data missing, add it
-    if len(missing_list) != 0:
-        complete_text += missing_sentence + missing_list
+        # if there's any data missing, add it
+        if len(missing_list) != 0:
+            complete_text += missing_sentence + missing_list
 
-    if pd.isna(gp_df['title'][index]):
-        return gp_df['name'][index] + ",<br><br>\n\n" + govpack_sentence + complete_text + closing_sentence
-    else:
-        return gp_df['title'][index].split(" ")[1] + ' ' + gp_df['family_name'][index] + ",<br><br>\n\n" + \
-               govpack_sentence + complete_text + closing_sentence
+        complete_text = df['Name'][row] + ",<br><br>\n\n" + govpack_sentence + complete_text + closing_sentence
+
+        all_emails.append(complete_text)
+
+    return pd.DataFrame(all_emails)
