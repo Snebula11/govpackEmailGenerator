@@ -65,4 +65,6 @@ def fill_template(df):
 
         all_emails.append(complete_text)
 
-    return pd.DataFrame(all_emails)
+    df = pd.DataFrame(all_emails, columns=['completed emails'])
+
+    return df
